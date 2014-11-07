@@ -56,6 +56,16 @@ public class TicketMachine
     }
     
     /**
+     * 
+     */
+    public int emptyMachine()
+    {
+       int machineMoney = total;
+       total = 0;
+       return total;
+    }
+    
+    /**
      * Receive an amount of money from a customer.
      * Check that the amount is sensible.
      */
