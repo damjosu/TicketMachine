@@ -45,7 +45,8 @@ public class TicketMachine
         return balance;
     }
 
-    /**Devuelve el dinero que hace falta meter
+    /**
+     * Devuelve el dinero que hace falta meter
      * para poder imrpimir un ticket
      */
     public int getAmountLeftToPay()
@@ -56,7 +57,7 @@ public class TicketMachine
     }
     
     /**
-     * 
+     * Vacia la máquina dejando el total a 0
      */
     public int emptyMachine()
     {
@@ -102,8 +103,10 @@ public class TicketMachine
             balance = balance - price;
         }
         else {
+            int amountLeftToPay;
+            amountLeftToPay = price - balance;
             System.out.println("You must insert at least: " +
-                               (price - balance) + " more cents.");
+                               amountLeftToPay + " more cents.");
                     
         }
     }
