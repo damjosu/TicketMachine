@@ -17,20 +17,21 @@ public class TicketMachine
     private int balance;
     // The total amount of money collected by this machine.
     private int total;
-   
+    //The price of a ticket with discount.
+    private int discountPrice;
+    //Adds the possibility to crete 2 kinds of machine: with or without discount price tickets.
+    private boolean discount;
+    
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost, Boolean discount)
+    public TicketMachine(int cost, int percentageDiscount, boolean discount)
     {
         price = cost;
         balance = 0;
         total = 0;
-        //If the user has a discount cupon he'll get a 10% lower price than those who doesn't.
-        if (discount == true)
-        {
-            price = (cost - (10 * cost / 100));
-        }           
+        discountPrice = price - (price * percentageDiscount / 100);
+               
     }
 
     /**
@@ -116,6 +117,45 @@ public class TicketMachine
         }
     }
 
+       /**
+     * Print a discount ticket if enough money has been inserted, and
+     * reduce the current balance by the ticket price. Print
+     * an error message if more money is required.
+     */
+    public void printDiscountTicket()
+    {
+        if (discount == true)
+        {
+            if(balance >= discountPrice) 
+           {
+                // Simulate the printing of a ticket.
+                System.out.println("##################");
+                System.out.println("# The BlueJ Line");
+                System.out.println("# Ticket");
+                System.out.println("# " + discountPrice + " cents.");
+                System.out.println("##################");
+                System.out.println();
+    
+                // Update the total collected with the price.
+                total = total + discountPrice;
+                // Reduce the balance by the prince.
+                balance = balance - discountPrice;
+           }
+           else 
+           {
+                int amountLeftToPay;
+                amountLeftToPay = discountPrice - balance;
+                System.out.println("You must insert at least: " +
+                                   amountLeftToPay + " more cents.");
+                        
+           }
+        }
+        else
+        {
+            System.out.println("This machine doesn't allow discount tickets");
+        }
+    }
+    
     /**
      * Return the money in the balance.
      * The balance is cleared.
